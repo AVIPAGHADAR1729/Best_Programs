@@ -53,7 +53,7 @@ class Matrix:
         return f'Matrix:<{self.mat}>'
     def multiply(self,B):
         return [
-            [sum(a*b for a,b in zip(row,col)) for col in B.mat ] for row in self.mat
+            [sum(a*b for a,b in zip(row,col)) for col in zip(*B.mat) ] for row in self.mat
         ]
 
 M1 = Matrix([[1,3,40],[10,10,50]])
