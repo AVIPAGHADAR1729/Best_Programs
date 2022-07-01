@@ -1,24 +1,28 @@
-
 class Node:
-
-    def __init__(self,data):
+    def __init__(self, data):
         self.data = data
         self.next = None
 
 
-
 class LinkedList:
-
     def __init__(self):
         self.head = None
 
+    def __iter__(self):
+        tmp = self.head
+        while tmp:
+            yield tmp.data
+            tmp = tmp.next
 
-    def addAtBeg(self,data):
+    def __len__(self):
+        return len(tuple(iter(self)))
+
+    def addAtBeg(self, data):
         node = Node(data)
         node.next = self.head
         self.head = node
 
-    def addAtEnd(self,data):
+    def addAtEnd(self, data):
 
         if self.head is None:
             node = Node(data)
@@ -32,18 +36,16 @@ class LinkedList:
             node = Node(data)
             tmp.next = node
             node.next = None
-            
-        
 
     def printLL(self):
         if self.head:
             tmp = self.head
-            while(tmp):
-                print(tmp.data,end='-->')
+            while tmp:
+                print(tmp.data, end="-->")
                 tmp = tmp.next
-            print('None')
+            print("None")
         else:
-            print('Error')
+            print("Error")
 
     def delAtBeg(self):
         tmp = self.head
@@ -53,20 +55,18 @@ class LinkedList:
     def delAtEnd(self):
 
         if self.head is None:
-            print('Error!!!')
+            print("Error!!!")
         else:
-            tmp= self.head
+            tmp = self.head
             while not tmp.next is None:
                 tx = tmp
                 tmp = tmp.next
             tx.next = None
-            
 
-
-    def delByValue(self,value):
+    def delByValue(self, value):
         if self.head == None:
-            print('Error!!!')
-        
+            print("Error!!!")
+
         temp = self.head
 
         while temp is not None:
@@ -78,14 +78,13 @@ class LinkedList:
         tx.next = temp.next
 
         temp = None
-    
-    
 
-        
-        
-        
-def concat(ll1,ll2):
-    t1,t2 = ll2.head,ll1.head
+    def __str__(self) -> str:
+        return f'{"-->".join(map(str,self))}-->None'
+
+
+def concat(ll1, ll2):
+    t1, t2 = ll2.head, ll1.head
     dummy = Node(-1)
     temp = dummy
 
@@ -96,28 +95,28 @@ def concat(ll1,ll2):
         else:
             temp.next = Node(t2.data)
             t2 = t2.next
-        
+
         temp = temp.next
-        
+
     return dummy.next
 
 
 def reverse(ll):
     tmp = ll.head
-    prev,next_ = None,None
+    prev, next_ = None, None
 
     while tmp is not None:
         next_ = tmp.next
         tmp.next = prev
         prev = tmp
         tmp = next_
-        
+
     return prev
 
 
-def Kreverse(ll,K):
+def Kreverse(ll, K):
     tmp = ll.head
-    prev,next_ = None,None
+    prev, next_ = None, None
     count = 0
 
     while tmp is not None and count < K:
@@ -128,29 +127,25 @@ def Kreverse(ll,K):
         count += 1
 
     if next_ is not None:
-        temp.next = Kreverse(next_,K)
-        
-        
+        temp.next = Kreverse(next_, K)
+
     return prev
 
 
-def addDigitAsLL(lla,llb):
+def addDigitAsLL(lla, llb):
     dummy = Node(-1)
     l3 = dummy
     carry = 0
     while lla != None or llb != None:
         a = lla.data if lla != None else 0
         b = llb.data if llb != None else 0
-        
-        
+
         total = a + b + carry
-        last_digit = total%10
+        last_digit = total % 10
         carry = total // 10
 
-        
-        
         l3.next = Node(last_digit)
-        
+
         if lla != None:
             lla = lla.next
         if llb != None:
@@ -162,9 +157,6 @@ def addDigitAsLL(lla,llb):
             l3 = l3.next
 
     return dummy.next
-        
-
-
 
 
 lla = LinkedList()
@@ -180,19 +172,13 @@ llb.addAtEnd(4)
 llb.addAtEnd(9)
 llb.addAtEnd(7)
 
-link = addDigitAsLL(lla.head,llb.head)
-
+link = addDigitAsLL(lla.head, llb.head)
 
 
 ll3 = LinkedList()
 ll3.head = link
 
 ll3.printLL()
-    
-
-
-
-
 
 
 ##ll = LinkedList()
@@ -235,14 +221,9 @@ ll3.printLL()
 ##ll2.printLL()
 
 
-
 ##ll1.printLL()
 ##
 ##ll1.delAtBeg()
 ##
 ##ll1.printLL()
-##        
-
-
-    
-            
+##
